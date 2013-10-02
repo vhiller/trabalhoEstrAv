@@ -1,5 +1,7 @@
 package br.com.unisinos.estrav.dicionario.collections;
 
+import static br.com.unisinos.estrav.dicionario.utils.FileHandler.SEPARADOR;
+
 /**
  * 
  * @author Leonardo Faitão
@@ -8,10 +10,9 @@ package br.com.unisinos.estrav.dicionario.collections;
  */
 public class LinkedList<T> {
 	private static final String MENSAGEM_ERRO = "Ocorreu uma falha na operação devido a lista estar nula.";
-	private static final String SEPARADOR = "#";
 
-	private Node<T> head; // nodo cabeça da lista
-	private Node<T> tail; // nodo cauda da lista
+	private LinkedListNode<T> head; // nodo cabeça da lista
+	private LinkedListNode<T> tail; // nodo cauda da lista
 	private long size; // número de nodos da lista
 
 	/**
@@ -29,7 +30,7 @@ public class LinkedList<T> {
 	 * 
 	 * @return Node nodo contendo o primeiro elemento.
 	 */
-	public Node<T> getFirst() {
+	public LinkedListNode<T> getFirst() {
 		if (isEmpty())
 			throw new RuntimeException(MENSAGEM_ERRO);
 		return head;
@@ -40,7 +41,7 @@ public class LinkedList<T> {
 	 * 
 	 * @return Node nodo contendo o último elemento.
 	 */
-	public Node<T> getLast() {
+	public LinkedListNode<T> getLast() {
 		if (isEmpty())
 			throw new RuntimeException(MENSAGEM_ERRO);
 		return tail;
@@ -53,7 +54,7 @@ public class LinkedList<T> {
 	 *            - elemento genérico a ser adicionado.
 	 */
 	public void addFirst(T element) {
-		Node<T> novoNodo = new Node<T>(element);
+		LinkedListNode<T> novoNodo = new LinkedListNode<T>(element);
 		novoNodo.setNext(head);
 		head = novoNodo;
 		size++;
@@ -71,7 +72,7 @@ public class LinkedList<T> {
 		if (isEmpty())
 			addFirst(element);
 		else {
-			Node<T> novoNodo = new Node<T>(element);
+			LinkedListNode<T> novoNodo = new LinkedListNode<T>(element);
 			novoNodo.setNext(null);
 			tail.setNext(novoNodo);
 			tail = novoNodo;
@@ -87,7 +88,7 @@ public class LinkedList<T> {
 	public T removeFirst() {
 		if (isEmpty())
 			throw new RuntimeException(MENSAGEM_ERRO);
-		Node<T> removedItem = head;
+		LinkedListNode<T> removedItem = head;
 		if (head == tail) {
 			head = tail = null;
 		} else {
@@ -105,11 +106,11 @@ public class LinkedList<T> {
 	public T removeLast() {
 		if (isEmpty())
 			throw new RuntimeException(MENSAGEM_ERRO);
-		Node<T> removedItem = tail;
+		LinkedListNode<T> removedItem = tail;
 		if (head == tail) {
 			head = tail = null;
 		} else {
-			Node<T> current = head;
+			LinkedListNode<T> current = head;
 			while (current.getNext() != tail) {
 				current = current.getNext();
 			}
@@ -128,10 +129,9 @@ public class LinkedList<T> {
 	public String toString() {
 		StringBuilder str = new StringBuilder();
 		if (!isEmpty()) {
-			Node<T> current = head;
+			LinkedListNode<T> current = head;
 			while (current != null) {
-				str.append(current.getElement().toString());
-				str.append(SEPARADOR);
+				str.append(current.getElement().toString() + " ");
 				current = current.getNext();
 			}
 		}

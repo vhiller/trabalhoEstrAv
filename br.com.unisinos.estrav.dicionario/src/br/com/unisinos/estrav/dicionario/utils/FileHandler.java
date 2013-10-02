@@ -17,6 +17,7 @@ import br.com.unisinos.estrav.dicionario.collections.AvlTree;
  */
 public class FileHandler {
 
+	public static final String SEPARADOR = "#";
 	private static File file; 
 	
 	/**
@@ -26,8 +27,7 @@ public class FileHandler {
 	 */
 	public static BufferedReader loadDictionaryFile(String path) {
 		try {
-			file = new File(path);
-			return new BufferedReader(new FileReader(file));
+			return new BufferedReader(new FileReader(new File(path)));
 		} catch (FileNotFoundException e) {
 			System.err.println("Arquivo não encontrado");
 			e.printStackTrace();
@@ -39,7 +39,7 @@ public class FileHandler {
 	 * Método que salva no arquivo o conteúdo atual da Árvore AVL.
 	 * @param avlTree - árvore AVL
 	 */
-	public static void savaDictionaryFile(String path, AvlTree<String> avlTree) {
+	public static void savaDictionaryFile(String path, AvlTree avlTree) {
 		// TODO Auto-generated method stub
 	}
 

@@ -1,6 +1,7 @@
 package br.com.unisinos.estrav.dicionario.dictionary;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 
 import br.com.unisinos.estrav.dicionario.collections.AvlTree;
 import br.com.unisinos.estrav.dicionario.collections.LinkedList;
@@ -16,7 +17,7 @@ import br.com.unisinos.estrav.dicionario.utils.FileHandler;
  */
 public class Translator {
 
-	private AvlTree<String> avlTree;
+	private AvlTree avlTree = new AvlTree();
 
 	/**
 	 * Traduz uma única palavra. Este método recebe como parâmetro a palavra a
@@ -24,7 +25,7 @@ public class Translator {
 	 * palavra.
 	 */
 	public LinkedList<String> translateWord(String word) {
-		return null;
+		return avlTree.search(word).getKey().getDefinitions();
 	}
 
 	/**
@@ -41,12 +42,22 @@ public class Translator {
 	 * definições baseado no conteúdo da árvore AVL
 	 */
 	public void saveDictionary(String filePath) {
-		FileHandler.savaDictionaryFile(filePath,avlTree);
+		FileHandler.savaDictionaryFile(filePath, avlTree);
 	}
 
-	protected void carregaDicionario(String filePath) {
-		BufferedReader bufferedReader = FileHandler.loadDictionaryFile(filePath);
-		// TODO Auto-generated method stub
+	public void carregaDicionario(String filePath) throws IOException {
+		BufferedReader bufferedReader = FileHandler
+				.loadDictionaryFile(filePath);
+		String line;
+		while ((line = bufferedReader.readLine()) != null) {
+			String[] split = line.split(FileHandler.SEPARADOR);
+			String word = split[0];
+			LinkedList<String> definitions = new LinkedList<>();
+			for (int i = 1; i < split.length; i++) {
+				definitions.addLast(split[i]);
+			}
+			avlTree.insert(new Dictionary(word, definitions));
+		}
 	}
 
 }

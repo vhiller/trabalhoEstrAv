@@ -6,22 +6,22 @@ package br.com.unisinos.estrav.dicionario.collections;
  * @author Vinicius Hiller
  * 
  */
-public class Node<T> {
+public class LinkedListNode<T> {
 	private T element;
-	private Node<T> next;
+	private LinkedListNode<T> next;
 
 	/** Creates a node with null references to its element and next node. */
-	public Node() {
+	public LinkedListNode() {
 		this(null, null);
 	}
 
 	/** Creates a node with the given element and next node. */
-	public Node(T t) {
+	public LinkedListNode(T t) {
 		this(t, null);
 	}
 
 	/** Creates a node with the given element and next node. */
-	public Node(T t, Node<T> n) {
+	public LinkedListNode(T t, LinkedListNode<T> n) {
 		element = t;
 		next = n;
 	}
@@ -30,7 +30,7 @@ public class Node<T> {
 		return element;
 	}
 
-	public Node<T> getNext() {
+	public LinkedListNode<T> getNext() {
 		return next;
 	}
 
@@ -38,7 +38,7 @@ public class Node<T> {
 		element = newElem;
 	}
 
-	public void setNext(Node<T> newNext) {
+	public void setNext(LinkedListNode<T> newNext) {
 		next = newNext;
 	}
 }
