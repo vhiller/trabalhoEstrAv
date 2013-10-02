@@ -3,6 +3,7 @@ package br.com.unisinos.estrav.dicionario.dictionary;
 import java.io.BufferedReader;
 import java.io.IOException;
 
+import br.com.unisinos.estrav.dicionario.collections.AvlNode;
 import br.com.unisinos.estrav.dicionario.collections.AvlTree;
 import br.com.unisinos.estrav.dicionario.collections.LinkedList;
 import br.com.unisinos.estrav.dicionario.utils.FileHandler;
@@ -25,7 +26,9 @@ public class Translator {
 	 * palavra.
 	 */
 	public LinkedList<String> translateWord(String word) {
-		return avlTree.search(word).getKey().getDefinitions();
+		AvlNode<Dictionary> search = avlTree.search(word);
+
+		return search != null ? search.getKey().getDefinitions() : null;
 	}
 
 	/**

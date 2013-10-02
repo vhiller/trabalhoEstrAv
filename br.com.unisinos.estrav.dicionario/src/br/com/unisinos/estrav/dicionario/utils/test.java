@@ -16,6 +16,9 @@ public class test {
 		}
 		System.out.println("this = " + translator.translateWord("the"));
 		System.out.println("name = " + translator.translateWord("name"));
+		System.out.println("date = " + translator.translateWord("date"));
+		System.out.println("love = " + translator.translateWord("love"));
+		System.out.println("are = " + translator.translateWord("are"));
 	}
 
 }
